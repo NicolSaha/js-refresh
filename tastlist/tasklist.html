@@ -20,7 +20,11 @@
     <div class="container">
       <div class="row">
         <div class="col s12">
-          <div id="main" class="card">
+          <div
+            id="main"
+            class="card"
+            style="background: linear-gradient(180deg, #fbe9e7, #cfd8dc)"
+          >
             <div class="card-content">
               <span class="card-title">Task List</span>
               <div class="row">
@@ -29,7 +33,13 @@
                     <input type="text" name="task" id="task" />
                     <label for="task">New Task</label>
                   </div>
-                  <input type="submit" value="Add Task" class="btn" />
+                  <button
+                    type="submit"
+                    value="Add Task"
+                    class="btn btn waves-effect waves-light deep-orange lighten-1"
+                  >
+                    Add
+                  </button>
                 </form>
               </div>
             </div>
@@ -40,7 +50,12 @@
                 <label for="filter-tasks">Filter Tasks</label>
               </div>
               <ul class="collection"></ul>
-              <a href="#" id="clear-tasks-btn" class="btn black">Clear Tasks</a>
+              <button
+                id="clear-tasks-btn"
+                class="btn blue-grey darken-3 btn waves-effect waves-light"
+              >
+                Clear Tasks
+              </button>
             </div>
           </div>
         </div>
