@@ -1,6 +1,6 @@
 # ✨ JS REFRESH
 
-### Thanks to Brad Traversy for his course: **_Modern JavaScript from the Beginning_**
+### A big thanks to [Brad Traversy](https://github.com/bradtraversy) for his Udemy course: [**_Modern JavaScript from the Beginning_**](https://www.udemy.com/course/modern-javascript-from-the-beginning/)
 
 ## 💭 Live Version
 
