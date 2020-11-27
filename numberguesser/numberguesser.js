@@ -33,7 +33,7 @@ game.addEventListener('mousedown', function (e) {
 });
 
 // LISTEN FOR GUESS
-guessBtn.addEventListener('submit', function () {
+guessBtn.addEventListener('click', function () {
   let guess = parseInt(guessInput.value);
 
   // VALIDATE
