@@ -10,6 +10,12 @@ document.querySelector('.post-submit').addEventListener('click', submitPost);
 // LISTEN FOR DELETE
 document.querySelector('#posts').addEventListener('click', deletePost);
 
+// LISTEN FOR EDIT STATE
+document.querySelector('#posts').addEventListener('click', enableEdit);
+
+// LISTEN FOR CANCEL
+document.querySelector('.card-form').addEventListener('click', cancelEdit);
+
 // GET POSTS
 function getPosts() {
   http
@@ -19,15 +25,42 @@ function getPosts() {
 }
 
 // SUBMIT POSTS
-
 function submitPost() {
   const title = document.querySelector('#title').value;
   const body = document.querySelector('#body').value;
+  const id = document.querySelector('#id').value;
 
   const data = {
     title,
     body,
   };
+
+  // VALIDATE INPUT
+  if (title === '' || body === '') {
+    showAlert('Please fill in all fields', 'alert alert-danger');
+  } else {
+    if (id === '') {
+      // CREATE POST
+      http
+        .post('http://localhost:3000/posts', data)
+        .then((data) => {
+          ui.showAlert('Post Added', 'alert alert-success');
+          ui.clearFields();
+          getPosts();
+        })
+        .catch((err) => console.log(err));
+    } else {
+      // UPDATE POST
+      http
+        .put(`http://localhost:3000/posts/${id}`, data)
+        .then((data) => {
+          ui.showAlert('Post Updated', 'alert alert-success');
+          ui.changeFormState('add');
+          getPosts();
+        })
+        .catch((err) => console.log(err));
+    }
+  }
 }
 
 //DELETE POST
@@ -45,14 +78,35 @@ function deletePost(e) {
         .catch((err) => console.log(err));
     }
   }
+}
 
-  // CREATE POST
-  http
-    .post('http://localhost:3000/posts', data)
-    .then((data) => {
-      ui.showAlert('Post Added', 'alert alert-success');
-      ui.clearFields();
-      getPosts();
-    })
-    .catch((err) => console.log(err));
+// ENABLE EDIT STATE
+function enableEdit(e) {
+  if (e.target.parentElement.classList.contains('edit')) {
+    const id = e.target.parentElement.dataset.id;
+    const title =
+      e.target.parentElement.previousElementSibling.previousElementSibling
+        .textContent;
+    const body = e.target.parentElement.previousElementSibling.textContent;
+
+    const data = {
+      id,
+      title,
+      body,
+    };
+
+    // FILL FORM WITH CURRENT POST
+    ui.fillForm(data);
+  } else {
+  }
+  e.preventDefault();
+}
+
+// CANCEL EDIT STATE
+function cancelEdit(e) {
+  if (e.target.classList.contains('post-cancel')) {
+    ui.changeFormState('add');
+  }
+
+  e.preventDefault();
 }
