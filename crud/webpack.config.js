@@ -2,11 +2,11 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    app: ['@babel/polyfill', './src/crud.js'],
+    app: ['@babel/polyfill', './src/app.js'],
   },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'crud.bundle.js',
+    filename: 'app.bundle.js',
   },
   module: {
     rules: [
